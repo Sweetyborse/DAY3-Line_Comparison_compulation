@@ -1,67 +1,53 @@
-import java.lang.Math;
-import java.util.*;
-public class LineComaprisonComputation
-{
-	private double LengthOfLine1;
-	private double LengthOfLine2;
+public class LineComparisonComputation {
 
-	private int x1;
-	private int x2;
-	private int x3;
-	private int x4;
-
-	private int y1;
-	private int y2;
-	private int y3;
-	private int y4;
-
-	public void readCoordinates()
-	{
-		Scanner sc1 = new Scanner(System.in);
-
-		System.out.println("Read X coordinates");
-		x1 = sc1.nextInt();
-		x2 = sc1.nextInt();
-		x3 = sc1.nextInt();
-		x4 = sc1.nextInt();
-		System.out.println("Read Y coordinates");
-		y1 = sc1.nextInt();
-		y2 = sc1.nextInt();
-		y3 = sc1.nextInt();
-		y4 = sc1.nextInt();
-
+	int x1, y1, x2, y2;
+	Double length;
+	
+	
+	public LineComparisonCalculator(int x1, int y1, int x2, int y2){
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+		
 	}
-
-	public void calculateLenght()
-	{
-		LengthOfLine1 = Math.sqrt((x2-x1)^2 + (y2-y1)^2);
-		System.out.println("Length of line 1 is: " +LengthOfLine1);
-
-		LengthOfLine2 = Math.sqrt((x4-x3)^2 + (y4-y3)^2);
-		System.out.println("Length of line 2 is: " +LengthOfLine2);
-
+	
+	public void calculateLength() {
+		length = Math.sqrt((x2-x1)^2 + (y2-y1)^2);
+		System.out.println("x1 : "+x1);
+		System.out.println("y1 : "+y1);
+		System.out.println("x2 : "+x2);
+		System.out.println("y2 : "+y2);
+		System.out.println("Length Of The Line is : "+length);
+		
 	}
-	public void compareTwoLine()
-	{
-		Double obj1 = new Double(LengthOfLine1);
-		Double obj2 = new Double(LengthOfLine2);
-
-		int compare = obj1.compareTo(obj2);
-
-		if(compare == 1)
-			System.out.println("Line 1 is gretter than Line 2");
-		else if(compare == -1)
-			System.out.println("Line 1 is less than Line 2");
-		else if(compare == 0)
-		System.out.println("Line1 and Line2 are equals");
+	
+	public void isEqual(LineComparisonCalculator line2) {
+		boolean isEqual = (this.length).equals(line2.length);
+		if(isEqual)
+			System.out.println("The Lines are equal");
+		else
+			System.out.println("The Lines are not equal");
 	}
-	public static void main(String[] args)
-	{
-
-		LineComaprison L1 = new LineComaprison();
-		L1.readCoordinates();
-		L1.calculateLenght();
-		L1.compareTwoLine();
-
+	
+	public void compareTheLines(LineComparisonCalculator line2) {
+		int compareValue = (this.length).compareTo(line2.length);
+		if(compareValue < 0)
+			System.out.println("Line 1 is smaller than Line 2");
+		else if(compareValue == 0)
+			System.out.println("Line 1 is equal to Line 2");
+		else
+			System.out.println("Line 1 is greater than Line 2");
 	}
-}
+	
+	public static void main(String[] args) {
+			
+		LineComparisonCalculator line1 = new LineComparisonCalculator(2, 3, 2, 8);
+		LineComparisonCalculator line2 = new LineComparisonCalculator(2, 3, 4, 8);
+		
+		line1.calculateLength();
+		line2.calculateLength();
+		line1.isEqual(line2);
+		line1.compareTheLines(line2);
+	}
+}       
